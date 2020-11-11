@@ -1,0 +1,24 @@
+<h1>time to write!</h1>
+
+<div class="writing_area">
+    <form id="blogform" action="/blogs/create" method="get">
+        <div class="form">
+            <label for="title">Title</label>
+            <br>
+            <input type="text" name="title">
+        </div>
+        
+        <div class="form">
+            <label for="wordcount">Your word count is</label>
+            <br>
+            <input readonly type="number" id="displayWordCount" name="wordcount">
+        </div>
+            <label for="text">Text</label>
+            <br>
+            <textarea type="textarea" cols="32" rows = "10" id="wordCount" onkeypress="countWords()" name="text"></textarea>
+        </div>
+        <input type="submit">
+    </form>
+</div>
+
+

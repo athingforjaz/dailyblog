@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dailyblog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script>
+        countWords = () => {
+            characterCount = document.getElementById("wordCount").value.length;
+            wordCount = characterCount/5;
+            document.getElementById("displayWordCount").value = Math.floor(wordCount);
+                }
+
+    </script>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+
+
+  </body>
+</html>
