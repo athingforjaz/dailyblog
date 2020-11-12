@@ -18,6 +18,10 @@ class BlogsController < ApplicationController
   def edit
   end
 
+  def kitten
+    render "jasmine"
+  end
+
   def show
     #should pull the blog from the id
     @blogs = Blog.find(params[:id])
