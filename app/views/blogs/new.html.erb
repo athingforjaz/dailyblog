@@ -1,7 +1,8 @@
 <h1>time to write!</h1>
 
 <div class="writing_area">
-    <form id="blogform" action="/blogs/create" method="get">
+    <form id="blogform" action="/blogs/create" method="post">
+    <input hidden="true" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="form">
             <label for="title">Title</label>
             <br>
