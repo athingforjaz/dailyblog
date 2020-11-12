@@ -1,0 +1,62 @@
+   <div class="biggerdiv">        
+        <h2>welcome to note leaver ~*~</h2>
+        <div class="bulletinboard">
+        <div class="notesarea" id="notesarea" onkeydown="addnote(event)">
+
+            <form id="noteform" action="/notes/create" method="post">
+            <textarea name="text" class="note" id="addnote">~ enter your note here ~</textarea>
+            <input hidden="true" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="submit">
+            </form>
+
+            <div class="note">press shift + enter to leave a note ~</div>
+            <div class="note">press shift + s to save all your notes ~</div>
+
+            <% @notes.each do |note| %>
+                <div class="note"><%= note.text %>
+                <%= link_to 'destroy this note', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+            <% end %>
+        </div>
+            <div class="sticker"><img src="https://img.pngio.com/top-lisa-perrino-v-stickers-for-android-ios-find-the-best-gif-lisa-frank-png-500_374.gif"></div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        function addnote(event) {
+            console.log("you did it");
+            if (event.keyCode === 13 && event.shiftKey)
+            {
+                console.log("you did it even more");
+                let theysaid = document.getElementById("addnote").value;
+                document.getElementById("addnote").innerHTML = "";
+                document.getElementById("notesarea").innerHTML += `<div class="note">${theysaid}</div>`;
+
+                // John says: SEND IT TO RUBY here! Asynchronous JavaScript Request ("Javascript fetch")
+                // You can possibly turn off the authenticity token if it causes an issue
+                // You might also be able to force a refresh
+                // "XHTTP" is the old version 
+                // Does the URL need an ID? let notesId = <%= :id %>
+                // Fetch pattern is fetch (resource, options) <-- the "resource" is a URL string or whatever, and the "options" are the configurable choices
+                fetch('/notes/create', {
+                method: 'POST', // or 'PUT'
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(theysaid),
+                })
+                .then(response => response.json())
+                .then(theysaid => {
+                console.log('Success:', theysaid);
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+                });
+            }
+        }
+
+        
+
+    </script>

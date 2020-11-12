@@ -26,6 +26,7 @@ class BlogsController < ApplicationController
     #should pull the blog from the id
     @blogs = Blog.find(params[:id])
   end
+  
   private
   def blogs_params
     params.require(:blogs).permit(:title,:text,:wordcount)

@@ -13,16 +13,17 @@
  *= require_tree .
  *= require_self
  */
- @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Roboto&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Roboto&family=Crafty+Girls&display=swap');
+
 
  body {
     background-image: url("https://static.vecteezy.com/system/resources/thumbnails/000/589/609/small/pixel-art-cheeseburger-seamless-background.png");
     color: #420039;
     font-family: 'Roboto', sans-serif;
-
  }
+
  h1 {
-     font-family: 'Architects Daughter', cursive;
+     font-family: 'Crafty Girls', cursive;
      background-color: rgba(236, 172, 236, 0.5);   
  }
 .writing_area {
@@ -67,4 +68,52 @@ background: #420039;
 border: 2px solid #420039;
 padding: 8px;
 color: #EDE8EB;
+}
+
+body {
+    background-image: url("https://cdn.lowgif.com/medium/34d3c9de6d288d6a-rainbow-colors-glitter-background-pattern-starry-night-seamless-7380.gif") ;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+h2 {
+    font-family: 'Crafty Girls', cursive;
+    font-size: 2em;
+    color:white;
+}
+.bulletinboard {
+    background-image: url("https://thumbs.dreamstime.com/t/cork-texture-colored-background-abstract-background-89282829.jpg");
+    border: 10px solid #d1368e;
+    box-shadow: 5px 5px 20px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.notesarea {            
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 20px;
+}
+.note{
+    background-image: url("https://previews.123rf.com/images/venski/venski1710/venski171000002/87809296-rainbow-leopard-spots-seamless-pattern.jpg");
+    background-size: 150px 150px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    word-wrap: normal;
+    overflow-wrap: break-word;
+    border: 1px solid black;
+    height: 150px;
+    width: 150px; 
+    box-shadow: 2px 2px 5px black;
+    font-family: 'Crafty Girls', cursive;
+}
+.sticker {
+    max-height: 200px;
+    width: auto;
 }
