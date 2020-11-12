@@ -1,12 +1,14 @@
 <h1>time to write!</h1>
 
 <div class="writing_area">
-    <form id="blogform" action="/blogs/create" method="post">
+    <form id="blogform" action="/blogs/create" method="post"> 
+    <%# The below hidden input passes through the authenticity token as a param so that the server can write it. It's a POST method thing.  %>
     <input hidden="true" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="form">
             <label for="title">Title</label>
             <br>
-            <input type="text" name="title">
+            <%# The name="" thing on the input tag is what passes it through as a param so that Ruby can Do Something with it %>
+            <input type="text" name="title"> 
         </div>
         
         <div class="form">

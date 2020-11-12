@@ -8,7 +8,7 @@ class BlogsController < ApplicationController
   
   def create
     my_blog = Blog.new
-    my_blog.title = params["title"]
+    my_blog.title = params["title"] # these come from the name="" in the HTML form
     my_blog.text = params["text"]
     my_blog.wordcount = params["wordcount"]
     my_blog.save
