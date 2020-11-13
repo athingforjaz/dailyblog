@@ -1,0 +1,103 @@
+<html><head>
+    <title>Dailyblog</title>
+    <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="cFLl3S+ZOkRtSgNL4g3DqTPYLH/3eCacCawrM/VxYFelMHumEI0pb8urlbs7bbBvKJPVDLXnOsJcvc4lQVUvug==">
+    
+
+    <script>
+        countWords = () => {
+            characterCount = document.getElementById("wordCount").value.length;
+            wordCount = characterCount/5;
+            document.getElementById("displayWordCount").value = Math.floor(wordCount);
+                }
+
+    </script>
+
+    <link rel="stylesheet" media="all" href="/assets/application.debug-1c05b63ca893c05648b5a0f75c77f98c041658662f3a403f51189f7397b9f196.css" data-turbolinks-track="reload">
+    <script src="/packs/js/application-9afcbb5693aa87623e69.js" data-turbolinks-track="reload"></script>
+  </head>
+
+  <body>
+       <div class="biggerdiv">        
+        <h2>welcome to note leaver ~*~</h2>
+        <div class="bulletinboard">
+        <div class="notesarea" id="notesarea" onkeydown="addnote(event)">
+
+            <form id="noteform" action="/notes/create" method="post">
+            <textarea name="text" class="note" id="addnote"></textarea>
+            <input hidden="true" name="authenticity_token" value="++hln2oF8cLm8AYCtaOa4WC6s6HQUWpaPygJ2+GZ39MuivvkVRHi6UARkPJsw+kne/FK0pLOdgRqOezNVb2QPg==">
+            <input type="submit">
+            </form>
+
+            <div class="note">press shift + enter to leave a note ~</div>
+            <div class="note">press shift + s to save all your notes ~</div>
+
+                <div class="note">~ enter your note here ~
+                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notes/9">destroy this note</a>
+            </div>
+                <div class="note">beep boop
+                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notes/10">destroy this note</a>
+            </div>
+                <div class="note">SAVE PLEASE
+                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notes/16">destroy this note</a>
+            </div>
+                <div class="note">save this note
+                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notes/17">destroy this note</a>
+            </div>
+                <div class="note">Note #3
+                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notes/18">destroy this note</a>
+            </div>
+                <div class="note">This is the ruby way
+                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notes/19">destroy this note</a>
+            </div>
+                <div class="note">Howdy!
+                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notes/20">destroy this note</a>
+            </div>
+        <div class="note">UGH WHY</div></div>
+            <div class="sticker"><img src="https://img.pngio.com/top-lisa-perrino-v-stickers-for-android-ios-find-the-best-gif-lisa-frank-png-500_374.gif"></div>
+        </div>
+        </div>
+    
+
+    <script>
+        function addnote(event) {
+            console.log("you did it");
+            if (event.keyCode === 13 && event.shiftKey)
+            {
+                console.log("you did it even more");
+                let theysaid = "\"" + document.getElementById("addnote").value + "\" ";
+                document.getElementById("addnote").innerHTML = "";
+                document.getElementById("notesarea").innerHTML += `<div class="note">${theysaid}</div>`;
+
+                // John says: SEND IT TO RUBY here! Asynchronous JavaScript Request ("Javascript fetch")
+                // You can possibly turn off the authenticity token if it causes an issue
+                // You might also be able to force a refresh
+                // "XHTTP" is the old version 
+                // Does the URL need an ID? let notesId = id
+                // Fetch pattern is fetch (resource, options) <-- the "resource" is a URL string or whatever, and the "options" are the configurable choices
+                fetch('/notes/create', {
+                    method: 'POST', // or 'PUT'
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(theysaid),
+                })
+                .then(response => response.json())
+                .then(theysaid => {
+                console.log('Success:', theysaid);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+        
+
+    </script>
+
+
+  
+
+</body></html>

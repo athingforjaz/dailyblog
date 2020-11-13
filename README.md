@@ -14,3 +14,6 @@ Morning:
 Afternoon:
 - Added /notes
 - Currently in the process of figuring out fetch in JavaScript to post a note using shift + enter
+
+## Notes 11/13/2020
+- See extensive commenting in notes/index.html for how the fetch in JavaScript works in this context. The formatting of the JSON is important. 

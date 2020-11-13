@@ -2,54 +2,53 @@
         <h2>welcome to note leaver ~*~</h2>
         <div class="bulletinboard">
         <div class="notesarea" id="notesarea" onkeydown="addnote(event)">
-
+<%# The below form is needed to pass the new note into Ruby - the "submit" button is not needed because it's passing through with an onkeydown event that asynchronously fetches the /notes/create URL - see JavaScript & accompanying notes below %>
             <form id="noteform" action="/notes/create" method="post">
             <textarea name="text" class="note" id="addnote">~ enter your note here ~</textarea>
-            <input hidden="true" name="authenticity_token" value="<%= form_authenticity_token %>">
-            <input type="submit">
+            <%# The below hides the authenticity token and has an ID so it can be accessed with JavaScript below %>
+            <input hidden="true" name="authenticity_token" value="<%= form_authenticity_token %>" id="auth_tok"> 
             </form>
 
             <div class="note">press shift + enter to leave a note ~</div>
-            <div class="note">press shift + s to save all your notes ~</div>
 
             <% @notes.each do |note| %>
                 <div class="note"><%= note.text %>
                 <%= link_to 'destroy this note', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
             </div>
-            <% end %>
-        </div>
-            <div class="sticker"><img src="https://img.pngio.com/top-lisa-perrino-v-stickers-for-android-ios-find-the-best-gif-lisa-frank-png-500_374.gif"></div>
-        </div>
-        </div>
-    </div>
+<%# The below JavaScript adds the note typed in the div to the Ruby database using "fetch", which grabs the URL (in this case, using the POST method), and also passes along the authenticity token.
+
+The challenging part here was formatting the JSON correctly. See the const data for how this needs to be formatted, and look at those variables to see how they each had to be formatted. JSON does want quotes around it, but fetch seems to be smart enough to add them.  %>
+<%# This is all inside the Ruby for each note loop, which is probably a goofy way to do this, but it works...? %>
+<%# https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch %>
 
     <script>
         function addnote(event) {
+            const ruby_delete = '<%= link_to 'destroy this note', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>';
             console.log("you did it");
             if (event.keyCode === 13 && event.shiftKey)
             {
                 console.log("you did it even more");
                 let theysaid = document.getElementById("addnote").value;
                 document.getElementById("addnote").innerHTML = "";
-                document.getElementById("notesarea").innerHTML += `<div class="note">${theysaid}</div>`;
+                document.getElementById("notesarea").innerHTML += `<div class="note">${theysaid}` + ruby_delete + `</div>`;
 
-                // John says: SEND IT TO RUBY here! Asynchronous JavaScript Request ("Javascript fetch")
-                // You can possibly turn off the authenticity token if it causes an issue
-                // You might also be able to force a refresh
-                // "XHTTP" is the old version 
-                // Does the URL need an ID? let notesId = <%= :id %>
                 // Fetch pattern is fetch (resource, options) <-- the "resource" is a URL string or whatever, and the "options" are the configurable choices
+
+                // Passing authenticty token to JSON with this variable
+                var authenticity = document.getElementById("auth_tok").value;
+                const data = { text: theysaid, authenticity_token: authenticity};
+                console.log(data);
                 fetch('/notes/create', {
                 method: 'POST', // or 'PUT'
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(theysaid),
+                body: JSON.stringify(data),
                 })
                 .then(response => response.json())
-                .then(theysaid => {
-                console.log('Success:', theysaid);
+                .then(data => {
+                console.log('Success:', data);
                 })
                 .catch((error) => {
                 console.error('Error:', error);
@@ -60,3 +59,10 @@
         
 
     </script>
+
+            <% end %>
+        </div>
+            <div class="sticker"><img src="https://img.pngio.com/top-lisa-perrino-v-stickers-for-android-ios-find-the-best-gif-lisa-frank-png-500_374.gif"></div>
+        </div>
+        </div>
+    </div>
